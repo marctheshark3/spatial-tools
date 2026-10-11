@@ -420,12 +420,16 @@ def main() -> int:
                 "Description": descriptions[name],
             },
         )
+        # Keep generated path attributes readable without trailing whitespace.
+        content = (
+            "\n".join(line.rstrip() for line in svg.getvalue().decode().splitlines()) + "\n"
+        ).encode()
         path = output / f"{name}.svg"
         if args.check:
-            if not path.exists() or path.read_bytes() != svg.getvalue():
+            if not path.exists() or path.read_bytes() != content:
                 stale.append(path.name)
         else:
-            path.write_bytes(svg.getvalue())
+            path.write_bytes(content)
             fig.savefig(
                 output / f"{name}.png",
                 dpi=160,
