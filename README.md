@@ -8,6 +8,8 @@ It checks distance and overlap, static fit, continuous path clearance for a disk
 footprint, and routes on a bounded four-connected grid. Every answer carries its
 units, frame, observation time, uncertainty, and scene completeness.
 
+![Four steps: ask a spatial question, describe the scene, run the check, and read the result. Refresh changing scenes and check again.](docs/images/workflow.png)
+
 ## Try it
 
 Requires Python 3.10+ and [uv](https://docs.astral.sh/uv/getting-started/installation/).
@@ -29,6 +31,19 @@ code is 64 if any request is invalid, otherwise 0.
 
 For a runtime-only installation, `python -m pip install .` also works. The skill
 is distributed in this Git repository, separately from the Python wheel.
+
+## See how clearance works
+
+The moving body's size matters. Here a disk with radius 0.25 m and an extra
+margin of 0.10 m needs more than 0.35 m from its centreline to the wall. The
+left path leaves 0.20 m and is blocked; the right leaves 0.40 m and is supported
+under the supplied dimensions.
+
+![Two paths above the same wall. At y=1.2 m the disk clips the wall and the result is blocked; at y=1.4 m its body and margin clear the wall and the result is supported.](docs/images/path-clearance.png)
+
+Try `examples/narrow-path.json` and `examples/clear-path.json`. The
+[visual walkthrough](docs/visual-guide.md) also shows rotated fit and replanning
+after a map update, with commands and expected results for each picture.
 
 ## Use the skill
 

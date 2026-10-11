@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "operation": "fit",
+  "scene": {
+    "frame": {
+      "id": "world",
+      "units": "mm",
+      "axes": "x-right-y-up"
+    },
+    "observed_at": "2026-10-10T12:00:00Z",
+    "source": "synthetic",
+    "complete": true,
+    "uncertainty": 0,
+    "objects": [
+      {
+        "id": "panel",
+        "shape": {
+          "type": "rectangle",
+          "min": [
+            -300,
+            -175
+          ],
+          "max": [
+            300,
+            175
+          ]
+        }
+      },
+      {
+        "id": "opening",
+        "shape": {
+          "type": "rectangle",
+          "min": [
+            -200,
+            -325
+          ],
+          "max": [
+            200,
+            325
+          ]
+        }
+      }
+    ]
+  },
+  "query": {
+    "as_of": "2026-10-10T12:00:01Z",
+    "item": "panel",
+    "container": "opening",
+    "margin": 10,
+    "rotation_degrees": 0
+  }
+}

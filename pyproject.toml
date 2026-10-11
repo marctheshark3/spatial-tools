@@ -22,6 +22,7 @@ spatial-tools = "spatial_tools.cli:main"
 
 [dependency-groups]
 dev = ["pytest>=8.3,<10", "ruff>=0.11,<1", "jsonschema>=4.23,<5"]
+docs = ["matplotlib>=3.10,<4"]
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/spatial_tools"]

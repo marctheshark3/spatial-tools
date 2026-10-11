@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="864pt" height="316.8pt" viewBox="0 0 864 316.8" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <title>workflow</title>
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:title>workflow</dc:title>
+    <dc:description>Four steps: ask a spatial question, supply a scene, run a check, read a result. Refresh changing scenes.</dc:description>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>spatial-tools</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 316.8 
+L 864 316.8 
+L 864 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 47.52 227.4624 
+L 216 227.4624 
+Q 231.552 227.4624 231.552 221.76 
+L 231.552 91.872 
+Q 231.552 86.1696 216 86.1696 
+L 47.52 86.1696 
+Q 31.968 86.1696 31.968 91.872 
+L 31.968 221.76 
+Q 31.968 227.4624 47.52 227.4624 
+z
+" clip-path="url(#pef5ac349d2)" style="fill: #f4f8fb; stroke: #d8e2ea; stroke-width: 1.2; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 256.608 227.4624 
+L 425.088 227.4624 
+Q 440.64 227.4624 440.64 221.76 
+L 440.64 91.872 
+Q 440.64 86.1696 425.088 86.1696 
+L 256.608 86.1696 
+Q 241.056 86.1696 241.056 91.872 
+L 241.056 221.76 
+Q 241.056 227.4624 256.608 227.4624 
+z
+" clip-path="url(#pef5ac349d2)" style="fill: #f4f8fb; stroke: #d8e2ea; stroke-width: 1.2; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 465.696 227.4624 
+L 634.176 227.4624 
+Q 649.728 227.4624 649.728 221.76 
+L 649.728 91.872 
+Q 649.728 86.1696 634.176 86.1696 
+L 465.696 86.1696 
+Q 450.144 86.1696 450.144 91.872 
+L 450.144 221.76 
+Q 450.144 227.4624 465.696 227.4624 
+z
+" clip-path="url(#pef5ac349d2)" style="fill: #f4f8fb; stroke: #d8e2ea; stroke-width: 1.2; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 674.784 227.4624 
+L 843.264 227.4624 
+Q 858.816 227.4624 858.816 221.76 
+L 858.816 91.872 
+Q 858.816 86.1696 843.264 86.1696 
+L 674.784 86.1696 
+Q 659.232 86.1696 659.232 91.872 
+L 659.232 221.76 
+Q 659.232 227.4624 674.784 227.4624 
+z
+" clip-path="url(#pef5ac349d2)" style="fill: #f4f8fb; stroke: #d8e2ea; stroke-width: 1.2; stroke-linejoin: miter"/>
+   </g>
+   <g id="text_1">
+    <text style="font-weight: 700; font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #2563a6" x="51.84" y="105.1776" transform="rotate(-0 51.84 105.1776)">1  ASK</text>
+   </g>
+   <g id="text_2">
+    <text style="font-weight: 700; font-size: 13.5px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #183247" x="51.84" y="125.136" transform="rotate(-0 51.84 125.136)">Choose a question</text>
+   </g>
+   <g id="text_3">
+    <text style="font-size: 11.2px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #183247" x="51.84" y="147.312" transform="rotate(-0 51.84 147.312)">Does it fit?</text>
+   </g>
+   <g id="text_4">
+    <text style="font-size: 11.2px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #183247" x="51.84" y="164.736" transform="rotate(-0 51.84 164.736)">Does this route clear?</text>
+   </g>
+   <g id="patch_6">
+    <path d="M 230.095055 158.4 
+Q 233.712945 158.4 235.430177 158.4 
+" style="fill: none; stroke: #2563a6; stroke-width: 1.7; stroke-linecap: round"/>
+    <path d="M 230.630177 156 
+L 235.430177 158.4 
+L 230.630177 160.8 
+" style="fill: none; stroke: #2563a6; stroke-width: 1.7; stroke-linecap: round"/>
+   </g>
+   <g id="text_5">
+    <text style="font-weight: 700; font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #2563a6" x="260.928" y="105.1776" transform="rotate(-0 260.928 105.1776)">2  SCENE</text>
+   </g>
+   <g id="text_6">
+    <text style="font-weight: 700; font-size: 13.5px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #183247" x="260.928" y="125.136" transform="rotate(-0 260.928 125.136)">Supply the geometry</text>
+   </g>
+   <g id="text_7">
+    <text style="font-size: 11.2px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #183247" x="260.928" y="147.312" transform="rotate(-0 260.928 147.312)">Coordinates + frame + units</text>
+   </g>
+   <g id="text_8">
+    <text style="font-size: 11.2px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #183247" x="260.928" y="164.736" transform="rotate(-0 260.928 164.736)">Footprint + error bound</text>
+   </g>
+   <g id="text_9">
+    <text style="font-size: 11.2px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #183247" x="260.928" y="182.16" transform="rotate(-0 260.928 182.16)">Obstacles + time</text>
+   </g>
+   <g id="patch_7">
+    <path d="M 439.183055 158.4 
+Q 442.800945 158.4 444.518177 158.4 
+" style="fill: none; stroke: #2563a6; stroke-width: 1.7; stroke-linecap: round"/>
+    <path d="M 439.718177 156 
+L 444.518177 158.4 
+L 439.718177 160.8 
+" style="fill: none; stroke: #2563a6; stroke-width: 1.7; stroke-linecap: round"/>
+   </g>
+   <g id="text_10">
+    <text style="font-weight: 700; font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #2563a6" x="470.016" y="105.1776" transform="rotate(-0 470.016 105.1776)">3  CHECK</text>
+   </g>
+   <g id="text_11">
+    <text style="font-weight: 700; font-size: 13.5px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #183247" x="470.016" y="125.136" transform="rotate(-0 470.016 125.136)">Run the calculation</text>
+   </g>
+   <g id="text_12">
+    <text style="font-size: 10.6px; font-family: 'DejaVu Sans Mono'; text-anchor: start; fill: #183247" x="470.016" y="147.312" transform="rotate(-0 470.016 147.312)">uv run spatial-tools \</text>
+   </g>
+   <g id="text_13">
+    <text style="font-size: 10.6px; font-family: 'DejaVu Sans Mono'; text-anchor: start; fill: #183247" x="470.016" y="164.736" transform="rotate(-0 470.016 164.736)">run scene.json</text>
+   </g>
+   <g id="patch_8">
+    <path d="M 648.271055 158.4 
+Q 651.888945 158.4 653.606177 158.4 
+" style="fill: none; stroke: #2563a6; stroke-width: 1.7; stroke-linecap: round"/>
+    <path d="M 648.806177 156 
+L 653.606177 158.4 
+L 648.806177 160.8 
+" style="fill: none; stroke: #2563a6; stroke-width: 1.7; stroke-linecap: round"/>
+   </g>
+   <g id="text_14">
+    <text style="font-weight: 700; font-size: 12px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #16735e" x="679.104" y="105.1776" transform="rotate(-0 679.104 105.1776)">4  RESULT</text>
+   </g>
+   <g id="text_15">
+    <text style="font-weight: 700; font-size: 13.5px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #183247" x="679.104" y="125.136" transform="rotate(-0 679.104 125.136)">Read the outcome</text>
+   </g>
+   <g id="text_16">
+    <text style="font-size: 11.2px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #183247" x="679.104" y="147.312" transform="rotate(-0 679.104 147.312)">supported  ·  model answer</text>
+   </g>
+   <g id="text_17">
+    <text style="font-size: 11.2px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #183247" x="679.104" y="164.736" transform="rotate(-0 679.104 164.736)">blocked  ·  change plan</text>
+   </g>
+   <g id="text_18">
+    <text style="font-size: 11.2px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #183247" x="679.104" y="182.16" transform="rotate(-0 679.104 182.16)">unknown  ·  need evidence</text>
+   </g>
+   <g id="text_19">
+    <text style="font-size: 11.2px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #183247" x="679.104" y="199.584" transform="rotate(-0 679.104 199.584)">invalid  ·  fix input</text>
+   </g>
+   <g id="patch_9">
+    <path d="M 758.318137 250.272 
+Q 531.359103 250.272 306.077119 250.272 
+" style="fill: none; stroke: #2563a6; stroke-width: 1.5; stroke-linecap: round"/>
+    <path d="M 310.877119 252.672 
+L 306.077119 250.272 
+L 310.877119 247.872 
+" style="fill: none; stroke: #2563a6; stroke-width: 1.5; stroke-linecap: round"/>
+   </g>
+   <g id="text_20">
+    <text style="font-size: 13px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #183247" x="531.36" y="278.784" transform="rotate(-0 531.36 278.784)">Refresh a changing scene and check again</text>
+   </g>
+   <g id="text_21">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #536b7e" x="47.52" y="305.712" transform="rotate(-0 47.52 305.712)">A clear path is supported only in the supplied 2D model.</text>
+   </g>
+  </g>
+  <g id="text_22">
+   <text style="font-weight: 700; font-size: 23px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #183247" x="47.52" y="36.484406" transform="rotate(-0 47.52 36.484406)">From a spatial question to a checked answer</text>
+  </g>
+  <g id="text_23">
+   <text style="font-size: 13.5px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #536b7e" x="47.52" y="60.192" transform="rotate(-0 47.52 60.192)">Use the skill to describe a scene, call the runtime, and read its evidence.</text>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="pef5ac349d2">
+   <rect x="0" y="0" width="864" height="316.8"/>
+  </clipPath>
+ </defs>
+</svg>

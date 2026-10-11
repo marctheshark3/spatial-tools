@@ -7,6 +7,10 @@ uv run ruff check .
 uv run python scripts/evaluate.py
 ```
 
+For documentation images, use `uv run --group docs python scripts/render_diagrams.py`
+and review the resulting SVG/PNG files. `--check` verifies the checked-in SVGs
+against the examples and locked renderer. See [image sources](docs/images/README.md).
+
 Include a small synthetic reproduction and an independent expected result when
 changing geometry behavior. Preserve strict parsing and conservative outcomes.
 Document the assumptions behind a result and distinguish runtime correctness from

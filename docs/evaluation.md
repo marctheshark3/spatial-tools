@@ -31,6 +31,8 @@ The initial full suite passed 60 tests. CI repeats the checks on Python 3.10,
 
 ## Map-update pilot
 
+![A clear 9 m route becomes blocked after the wall grows; replanning produces a clear 10 m route.](images/route-refresh.png)
+
 The pilot invokes the actual skill launcher for every calculation and saves its
 requests and results in ignored `eval-runs/runtime-pilot/`:
 
@@ -39,6 +41,9 @@ requests and results in ignored `eval-runs/runtime-pilot/`:
 3. Enlarge the wall and refresh the observation timestamp. The old route is blocked.
 4. Plan again from the new scene. The shortest grid route is now 10 units.
 5. Check the new returned route before relying on it.
+
+The [visual walkthrough](visual-guide.md#refresh-the-map-and-replan) connects
+this diagram to the commands, footprint, grid, and expected outcomes.
 
 To exercise an installed skill instead of the source path:
 
