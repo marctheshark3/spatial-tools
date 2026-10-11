@@ -1,0 +1,557 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/marctheshark3/spatial-tools/schema/request-v1",
+  "title": "spatial-tools request, version 1",
+  "description": "Structural contract; runtime also checks planar geometry and evidence.",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "type": "integer",
+      "const": 1
+    },
+    "operation": {
+      "enum": [
+        "validate_scene",
+        "relation",
+        "fit",
+        "check_path",
+        "plan"
+      ]
+    },
+    "scene": {
+      "$ref": "#/$defs/scene"
+    },
+    "query": {
+      "type": "object"
+    }
+  },
+  "required": [
+    "schema_version",
+    "operation",
+    "scene",
+    "query"
+  ],
+  "additionalProperties": false,
+  "oneOf": [
+    {
+      "properties": {
+        "operation": {
+          "const": "validate_scene"
+        },
+        "query": {
+          "$ref": "#/$defs/validate_sceneQuery"
+        }
+      }
+    },
+    {
+      "properties": {
+        "operation": {
+          "const": "relation"
+        },
+        "query": {
+          "$ref": "#/$defs/relationQuery"
+        }
+      }
+    },
+    {
+      "properties": {
+        "operation": {
+          "const": "fit"
+        },
+        "query": {
+          "$ref": "#/$defs/fitQuery"
+        }
+      }
+    },
+    {
+      "properties": {
+        "operation": {
+          "const": "check_path"
+        },
+        "query": {
+          "$ref": "#/$defs/check_pathQuery"
+        }
+      }
+    },
+    {
+      "properties": {
+        "operation": {
+          "const": "plan"
+        },
+        "query": {
+          "$ref": "#/$defs/planQuery"
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "pair": {
+      "type": "array",
+      "items": {
+        "type": "number",
+        "minimum": -10000000,
+        "maximum": 10000000
+      },
+      "minItems": 2,
+      "maxItems": 2
+    },
+    "ring": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/pair"
+      },
+      "minItems": 3,
+      "maxItems": 4096
+    },
+    "rectangle": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "const": "rectangle"
+        },
+        "min": {
+          "$ref": "#/$defs/pair"
+        },
+        "max": {
+          "$ref": "#/$defs/pair"
+        }
+      },
+      "required": [
+        "type",
+        "min",
+        "max"
+      ],
+      "additionalProperties": false
+    },
+    "point": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "const": "point"
+        },
+        "coordinates": {
+          "$ref": "#/$defs/pair"
+        }
+      },
+      "required": [
+        "type",
+        "coordinates"
+      ],
+      "additionalProperties": false
+    },
+    "polygon": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "const": "polygon"
+        },
+        "vertices": {
+          "$ref": "#/$defs/ring"
+        },
+        "holes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/ring"
+          },
+          "maxItems": 1365
+        }
+      },
+      "required": [
+        "type",
+        "vertices"
+      ],
+      "additionalProperties": false
+    },
+    "shape": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/rectangle"
+        },
+        {
+          "$ref": "#/$defs/point"
+        },
+        {
+          "$ref": "#/$defs/polygon"
+        }
+      ]
+    },
+    "areaShape": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/rectangle"
+        },
+        {
+          "$ref": "#/$defs/polygon"
+        }
+      ]
+    },
+    "frame": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "units": {
+          "enum": [
+            "m",
+            "cm",
+            "mm",
+            "px"
+          ]
+        },
+        "axes": {
+          "enum": [
+            "x-right-y-up",
+            "x-right-y-down"
+          ]
+        }
+      },
+      "required": [
+        "id",
+        "units",
+        "axes"
+      ],
+      "additionalProperties": false
+    },
+    "grid": {
+      "type": "object",
+      "properties": {
+        "min": {
+          "$ref": "#/$defs/pair"
+        },
+        "max": {
+          "$ref": "#/$defs/pair"
+        },
+        "step": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 10000000,
+          "exclusiveMinimum": 0
+        },
+        "max_nodes": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100000
+        }
+      },
+      "required": [
+        "min",
+        "max",
+        "step",
+        "max_nodes"
+      ],
+      "additionalProperties": false
+    },
+    "scene": {
+      "type": "object",
+      "properties": {
+        "frame": {
+          "$ref": "#/$defs/frame"
+        },
+        "observed_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "source": {
+          "enum": [
+            "synthetic",
+            "application",
+            "measured",
+            "inferred"
+          ]
+        },
+        "complete": {
+          "type": "boolean"
+        },
+        "uncertainty": {
+          "anyOf": [
+            {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 10000000
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "objects": {
+          "type": "array",
+          "maxItems": 256,
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 128
+              },
+              "shape": {
+                "$ref": "#/$defs/shape"
+              }
+            },
+            "required": [
+              "id",
+              "shape"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "workspace": {
+          "$ref": "#/$defs/areaShape"
+        }
+      },
+      "required": [
+        "frame",
+        "observed_at",
+        "source",
+        "complete",
+        "uncertainty",
+        "objects"
+      ],
+      "additionalProperties": false
+    },
+    "validate_sceneQuery": {
+      "type": "object",
+      "properties": {
+        "frame_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "units": {
+          "enum": [
+            "m",
+            "cm",
+            "mm",
+            "px"
+          ]
+        },
+        "as_of": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "max_age_seconds": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 10000000
+        }
+      },
+      "required": [],
+      "additionalProperties": false
+    },
+    "relationQuery": {
+      "type": "object",
+      "properties": {
+        "frame_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "units": {
+          "enum": [
+            "m",
+            "cm",
+            "mm",
+            "px"
+          ]
+        },
+        "as_of": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "max_age_seconds": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 10000000
+        },
+        "a": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "b": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "predicate": {
+          "enum": [
+            "distance",
+            "intersects",
+            "covers"
+          ]
+        }
+      },
+      "required": [
+        "a",
+        "b",
+        "predicate"
+      ],
+      "additionalProperties": false
+    },
+    "fitQuery": {
+      "type": "object",
+      "properties": {
+        "frame_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "units": {
+          "enum": [
+            "m",
+            "cm",
+            "mm",
+            "px"
+          ]
+        },
+        "as_of": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "max_age_seconds": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 10000000
+        },
+        "item": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "container": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "margin": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 10000000
+        },
+        "rotation_degrees": {
+          "type": "number",
+          "minimum": -10000000,
+          "maximum": 10000000
+        },
+        "translation": {
+          "$ref": "#/$defs/pair"
+        }
+      },
+      "required": [
+        "item",
+        "container",
+        "margin"
+      ],
+      "additionalProperties": false
+    },
+    "check_pathQuery": {
+      "type": "object",
+      "properties": {
+        "frame_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "units": {
+          "enum": [
+            "m",
+            "cm",
+            "mm",
+            "px"
+          ]
+        },
+        "as_of": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "max_age_seconds": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 10000000
+        },
+        "path": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/pair"
+          },
+          "minItems": 1,
+          "maxItems": 4096
+        },
+        "radius": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 10000000
+        },
+        "margin": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 10000000
+        }
+      },
+      "required": [
+        "path",
+        "radius",
+        "margin"
+      ],
+      "additionalProperties": false
+    },
+    "planQuery": {
+      "type": "object",
+      "properties": {
+        "frame_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "units": {
+          "enum": [
+            "m",
+            "cm",
+            "mm",
+            "px"
+          ]
+        },
+        "as_of": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "max_age_seconds": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 10000000
+        },
+        "start": {
+          "$ref": "#/$defs/pair"
+        },
+        "goal": {
+          "$ref": "#/$defs/pair"
+        },
+        "radius": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 10000000
+        },
+        "margin": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 10000000
+        },
+        "grid": {
+          "$ref": "#/$defs/grid"
+        }
+      },
+      "required": [
+        "start",
+        "goal",
+        "radius",
+        "margin",
+        "grid"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

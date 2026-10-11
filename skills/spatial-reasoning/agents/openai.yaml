@@ -1,0 +1,7 @@
+interface:
+  display_name: "Spatial Reasoning"
+  short_description: "Check 2D fit, clearance, relations, and routes"
+  default_prompt: "Use $spatial-reasoning to model this 2D spatial question, run the geometry check, and explain the result and its assumptions."
+
+policy:
+  allow_implicit_invocation: true

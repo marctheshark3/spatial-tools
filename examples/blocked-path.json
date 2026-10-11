@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "operation": "check_path",
+  "scene": {
+    "frame": {
+      "id": "world",
+      "units": "m",
+      "axes": "x-right-y-up"
+    },
+    "observed_at": "2026-10-10T12:00:00Z",
+    "source": "synthetic",
+    "complete": true,
+    "uncertainty": 0,
+    "objects": [
+      {
+        "id": "wall",
+        "shape": {
+          "type": "rectangle",
+          "min": [
+            2,
+            -1
+          ],
+          "max": [
+            4,
+            1
+          ]
+        }
+      }
+    ]
+  },
+  "query": {
+    "as_of": "2026-10-10T12:00:01Z",
+    "path": [
+      [
+        0,
+        0
+      ],
+      [
+        6,
+        0
+      ]
+    ],
+    "radius": 0.25,
+    "margin": 0.1
+  }
+}

@@ -1,0 +1,1743 @@
+[
+  {
+    "id": "clear-wide-path",
+    "request": {
+      "schema_version": 1,
+      "operation": "check_path",
+      "scene": {
+        "frame": {
+          "id": "world",
+          "units": "m",
+          "axes": "x-right-y-up"
+        },
+        "observed_at": "2026-10-10T12:00:00Z",
+        "source": "synthetic",
+        "complete": true,
+        "uncertainty": 0,
+        "objects": [
+          {
+            "id": "wall",
+            "shape": {
+              "type": "rectangle",
+              "min": [
+                2,
+                -1
+              ],
+              "max": [
+                4,
+                1
+              ]
+            }
+          }
+        ]
+      },
+      "query": {
+        "as_of": "2026-10-10T12:00:01Z",
+        "path": [
+          [
+            0,
+            1.4
+          ],
+          [
+            6,
+            1.4
+          ]
+        ],
+        "radius": 0.25,
+        "margin": 0.1
+      }
+    },
+    "expected": {
+      "status": "supported",
+      "result.minimum_obstacle_clearance": 0.4,
+      "result.required_clearance": 0.35
+    },
+    "rationale": "Wall top is y=1; centreline y=1.4 leaves 0.4 > 0.25+0.1."
+  },
+  {
+    "id": "cross-wall-between-endpoints",
+    "request": {
+      "schema_version": 1,
+      "operation": "check_path",
+      "scene": {
+        "frame": {
+          "id": "world",
+          "units": "m",
+          "axes": "x-right-y-up"
+        },
+        "observed_at": "2026-10-10T12:00:00Z",
+        "source": "synthetic",
+        "complete": true,
+        "uncertainty": 0,
+        "objects": [
+          {
+            "id": "wall",
+            "shape": {
+              "type": "rectangle",
+              "min": [
+                2,
+                -1
+              ],
+              "max": [
+                4,
+                1
+              ]
+            }
+          }
+        ]
+      },
+      "query": {
+        "as_of": "2026-10-10T12:00:01Z",
+        "path": [
+          [
+            0,
+            0
+          ],
+          [
+            6,
+            0
+          ]
+        ],
+        "radius": 0.25,
+        "margin": 0.1
+      }
+    },
+    "expected": {
+      "status": "blocked",
+      "result.minimum_obstacle_clearance": 0
+    },
+    "rationale": "Both endpoints are outside the wall, but the segment crosses its interior."
+  },
+  {
+    "id": "footprint-too-wide",
+    "request": {
+      "schema_version": 1,
+      "operation": "check_path",
+      "scene": {
+        "frame": {
+          "id": "world",
+          "units": "m",
+          "axes": "x-right-y-up"
+        },
+        "observed_at": "2026-10-10T12:00:00Z",
+        "source": "synthetic",
+        "complete": true,
+        "uncertainty": 0,
+        "objects": [
+          {
+            "id": "wall",
+            "shape": {
+              "type": "rectangle",
+              "min": [
+                2,
+                -1
+              ],
+              "max": [
+                4,
+                1
+              ]
+            }
+          }
+        ]
+      },
+      "query": {
+        "as_of": "2026-10-10T12:00:01Z",
+        "path": [
+          [
+            0,
+            1.2
+          ],
+          [
+            6,
+            1.2
+          ]
+        ],
+        "radius": 0.25,
+        "margin": 0.1
+      }
+    },
+    "expected": {
+      "status": "blocked",
+      "result.minimum_obstacle_clearance": 0.2
+    },
+    "rationale": "A clear centreline leaves only 0.2 for the required 0.35 footprint and margin."
+  },
+  {
+    "id": "exact-clearance-contact",
+    "request": {
+      "schema_version": 1,
+      "operation": "check_path",
+      "scene": {
+        "frame": {
+          "id": "world",
+          "units": "m",
+          "axes": "x-right-y-up"
+        },
+        "observed_at": "2026-10-10T12:00:00Z",
+        "source": "synthetic",
+        "complete": true,
+        "uncertainty": 0,
+        "objects": [
+          {
+            "id": "wall",
+            "shape": {
+              "type": "rectangle",
+              "min": [
+                2,
+                -1
+              ],
+              "max": [
+                4,
+                1
+              ]
+            }
+          }
+        ]
+      },
+      "query": {
+        "as_of": "2026-10-10T12:00:01Z",
+        "path": [
+          [
+            0,
+            1.35
+          ],
+          [
+            6,
+            1.35
+          ]
+        ],
+        "radius": 0.25,
+        "margin": 0.1
+      }
+    },
+    "expected": {
+      "status": "blocked"
+    },
+    "rationale": "Equality to radius plus margin is blocked by the contact policy."
+  },
+  {
+    "id": "uncertainty-removes-clearance",
+    "request": {
+      "schema_version": 1,
+      "operation": "check_path",
+      "scene": {
+        "frame": {
+          "id": "world",
+          "units": "m",
+          "axes": "x-right-y-up"
+        },
+        "observed_at": "2026-10-10T12:00:00Z",
+        "source": "synthetic",
+        "complete": true,
+        "uncertainty": 0.03,
+        "objects": [
+          {
+            "id": "wall",
+            "shape": {
+              "type": "rectangle",
+              "min": [
+                2,
+                -1
+              ],
+              "max": [
+                4,
+                1
+              ]
+            }
+          }
+        ]
+      },
+      "query": {
+        "as_of": "2026-10-10T12:00:01Z",
+        "path": [
+          [
+            0,
+            1.4
+          ],
+          [
+            6,
+            1.4
+          ]
+        ],
+        "radius": 0.25,
+        "margin": 0.1
+      }
+    },
+    "expected": {
+      "status": "blocked",
+      "result.required_clearance": 0.41
+    },
+    "rationale": "Two 0.03 positional-error bounds increase the requirement from 0.35 to 0.41."
+  },
+  {
+    "id": "unknown-uncertainty",
+    "request": {
+      "schema_version": 1,
+      "operation": "check_path",
+      "scene": {
+        "frame": {
+          "id": "world",
+          "units": "m",
+          "axes": "x-right-y-up"
+        },
+        "observed_at": "2026-10-10T12:00:00Z",
+        "source": "synthetic",
+        "complete": true,
+        "uncertainty": null,
+        "objects": [
+          {
+            "id": "wall",
+            "shape": {
+              "type": "rectangle",
+              "min": [
+                2,
+                -1
+              ],
+              "max": [
+                4,
+                1
+              ]
+            }
+          }
+        ]
+      },
+      "query": {
+        "as_of": "2026-10-10T12:00:01Z",
+        "path": [
+          [
+            0,
+            1.4
+          ],
+          [
+            6,
+            1.4
+          ]
+        ],
+        "radius": 0.25,
+        "margin": 0.1
+      }
+    },
+    "expected": {
+      "status": "unknown"
+    },
+    "rationale": "No finite positional-error bound supports a clearance claim."
+  },
+  {
+    "id": "incomplete-obstacle-map",
+    "request": {
+      "schema_version": 1,
+      "operation": "check_path",
+      "scene": {
+        "frame": {
+          "id": "world",
+          "units": "m",
+          "axes": "x-right-y-up"
+        },
+        "observed_at": "2026-10-10T12:00:00Z",
+        "source": "synthetic",
+        "complete": false,
+        "uncertainty": 0,
+        "objects": [
+          {
+            "id": "wall",
+            "shape": {
+              "type": "rectangle",
+              "min": [
+                2,
+                -1
+              ],
+              "max": [
+                4,
+                1
+              ]
+            }
+          }
+        ]
+      },
+      "query": {
+        "as_of": "2026-10-10T12:00:01Z",
+        "path": [
+          [
+            0,
+            1.4
+          ],
+          [
+            6,
+            1.4
+          ]
+        ],
+        "radius": 0.25,
+        "margin": 0.1
+      }
+    },
+    "expected": {
+      "status": "unknown"
+    },
+    "rationale": "A missing obstacle cannot be excluded from an incomplete scene."
+  },
+  {
+    "id": "stale-observation",
+    "request": {
+      "schema_version": 1,
+      "operation": "check_path",
+      "scene": {
+        "frame": {
+          "id": "world",
+          "units": "m",
+          "axes": "x-right-y-up"
+        },
+        "observed_at": "2026-10-10T12:00:00Z",
+        "source": "synthetic",
+        "complete": true,
+        "uncertainty": 0,
+        "objects": [
+          {
+            "id": "wall",
+            "shape": {
+              "type": "rectangle",
+              "min": [
+                2,
+                -1
+              ],
+              "max": [
+                4,
+                1
+              ]
+            }
+          }
+        ]
+      },
+      "query": {
+        "as_of": "2026-10-10T12:01:00Z",
+        "path": [
+          [
+            0,
+            1.4
+          ],
+          [
+            6,
+            1.4
+          ]
+        ],
+        "radius": 0.25,
+        "margin": 0.1
+      }
+    },
+    "expected": {
+      "status": "unknown"
+    },
+    "rationale": "Observation age is 60 seconds, greater than the default 30 seconds."
+  },
+  {
+    "id": "future-observation",
+    "request": {
+      "schema_version": 1,
+      "operation": "check_path",
+      "scene": {
+        "frame": {
+          "id": "world",
+          "units": "m",
+          "axes": "x-right-y-up"
+        },
+        "observed_at": "2026-10-10T12:00:00Z",
+        "source": "synthetic",
+        "complete": true,
+        "uncertainty": 0,
+        "objects": [
+          {
+            "id": "wall",
+            "shape": {
+              "type": "rectangle",
+              "min": [
+                2,
+                -1
+              ],
+              "max": [
+                4,
+                1
+              ]
+            }
+          }
+        ]
+      },
+      "query": {
+        "as_of": "2026-10-10T11:59:59Z",
+        "path": [
+          [
+            0,
+            1.4
+          ],
+          [
+            6,
+            1.4
+          ]
+        ],
+        "radius": 0.25,
+        "margin": 0.1
+      }
+    },
+    "expected": {
+      "status": "unknown"
+    },
+    "rationale": "Observation is one second ahead of the evaluation clock."
+  },
+  {
+    "id": "workspace-footprint-overhang",
+    "request": {
+      "schema_version": 1,
+      "operation": "check_path",
+      "scene": {
+        "frame": {
+          "id": "world",
+          "units": "m",
+          "axes": "x-right-y-up"
+        },
+        "observed_at": "2026-10-10T12:00:00Z",
+        "source": "synthetic",
+        "complete": true,
+        "uncertainty": 0,
+        "objects": [
+          {
+            "id": "wall",
+            "shape": {
+              "type": "rectangle",
+              "min": [
+                2,
+                -1
+              ],
+              "max": [
+                4,
+                1
+              ]
+            }
+          }
+        ],
+        "workspace": {
+          "type": "rectangle",
+          "min": [
+            -1,
+            -3
+          ],
+          "max": [
+            7,
+            3
+          ]
+        }
+      },
+      "query": {
+        "as_of": "2026-10-10T12:00:01Z",
+        "path": [
+          [
+            0,
+            2.8
+          ],
+          [
+            6,
+            2.8
+          ]
+        ],
+        "radius": 0.25,
+        "margin": 0.1
+      }
+    },
+    "expected": {
+      "status": "blocked",
+      "result.workspace_clearance": 0.2
+    },
+    "rationale": "Centreline is inside the workspace but the disk plus margin needs 0.35 from its edge."
+  },
+  {
+    "id": "rotated-panel-fits",
+    "request": {
+      "schema_version": 1,
+      "operation": "fit",
+      "scene": {
+        "frame": {
+          "id": "world",
+          "units": "mm",
+          "axes": "x-right-y-up"
+        },
+        "observed_at": "2026-10-10T12:00:00Z",
+        "source": "synthetic",
+        "complete": true,
+        "uncertainty": 0,
+        "objects": [
+          {
+            "id": "panel",
+            "shape": {
+              "type": "rectangle",
+              "min": [
+                -300,
+                -175
+              ],
+              "max": [
+                300,
+                175
+              ]
+            }
+          },
+          {
+            "id": "opening",
+            "shape": {
+              "type": "rectangle",
+              "min": [
+                -200,
+                -325
+              ],
+              "max": [
+                200,
+                325
+              ]
+            }
+          }
+        ]
+      },
+      "query": {
+        "as_of": "2026-10-10T12:00:01Z",
+        "item": "panel",
+        "container": "opening",
+        "margin": 10,
+        "rotation_degrees": 90
+      }
+    },
+    "expected": {
+      "status": "supported",
+      "result.boundary_clearance": 25
+    },
+    "rationale": "Rotating 600x350 by 90 degrees makes 350x600 inside a 400x650 opening, with 25 per side."
+  },
+  {
+    "id": "unrotated-panel-too-wide",
+    "request": {
+      "schema_version": 1,
+      "operation": "fit",
+      "scene": {
+        "frame": {
+          "id": "world",
+          "units": "mm",
+          "axes": "x-right-y-up"
+        },
+        "observed_at": "2026-10-10T12:00:00Z",
+        "source": "synthetic",
+        "complete": true,
+        "uncertainty": 0,
+        "objects": [
+          {
+            "id": "panel",
+            "shape": {
+              "type": "rectangle",
+              "min": [
+                -300,
+                -175
+              ],
+              "max": [
+                300,
+                175
+              ]
+            }
+          },
+          {
+            "id": "opening",
+            "shape": {
+              "type": "rectangle",
+              "min": [
+                -200,
+                -325
+              ],
+              "max": [
+                200,
+                325
+              ]
+            }
+          }
+        ]
+      },
+      "query": {
+        "as_of": "2026-10-10T12:00:01Z",
+        "item": "panel",
+        "container": "opening",
+        "margin": 10,
+        "rotation_degrees": 0
+      }
+    },
+    "expected": {
+      "status": "blocked"
+    },
+    "rationale": "A 600-wide panel cannot fit inside a 400-wide opening at this placement."
+  },
+  {
+    "id": "static-fit-boundary-contact",
+    "request": {
+      "schema_version": 1,
+      "operation": "fit",
+      "scene": {
+        "frame": {
+          "id": "world",
+          "units": "mm",
+          "axes": "x-right-y-up"
+        },
+        "observed_at": "2026-10-10T12:00:00Z",
+        "source": "synthetic",
+        "complete": true,
+        "uncertainty": 0,
+        "objects": [
+          {
+            "id": "panel",
+            "shape": {
+              "type": "rectangle",
+              "min": [
+                -300,
+                -175
+              ],
+              "max": [
+                300,
+                175
+              ]
+            }
+          },
+          {
+            "id": "opening",
+            "shape": {
+              "type": "rectangle",
+              "min": [
+                -200,
+                -325
+              ],
+              "max": [
+                200,
+                325
+              ]
+            }
+          }
+        ]
+      },
+      "query": {
+        "as_of": "2026-10-10T12:00:01Z",
+        "item": "panel",
+        "container": "opening",
+        "margin": 0,
+        "rotation_degrees": 90,
+        "translation": [
+          25,
+          0
+        ]
+      }
+    },
+    "expected": {
+      "status": "blocked",
+      "result.boundary_clearance": 0
+    },
+    "rationale": "The rotated panel touches the opening at x=200; contact is blocked."
+  },
+  {
+    "id": "pythagorean-distance",
+    "request": {
+      "schema_version": 1,
+      "operation": "relation",
+      "scene": {
+        "frame": {
+          "id": "world",
+          "units": "m",
+          "axes": "x-right-y-up"
+        },
+        "observed_at": "2026-10-10T12:00:00Z",
+        "source": "synthetic",
+        "complete": true,
+        "uncertainty": 0,
+        "objects": [
+          {
+            "id": "a",
+            "shape": {
+              "type": "point",
+              "coordinates": [
+                0,
+                0
+              ]
+            }
+          },
+          {
+            "id": "b",
+            "shape": {
+              "type": "point",
+              "coordinates": [
+                3,
+                4
+              ]
+            }
+          }
+        ]
+      },
+      "query": {
+        "as_of": "2026-10-10T12:00:01Z",
+        "a": "a",
+        "b": "b",
+        "predicate": "distance"
+      }
+    },
+    "expected": {
+      "status": "supported",
+      "result.distance": 5
+    },
+    "rationale": "A 3-4-5 triangle gives exact analytical distance 5."
+  },
+  {
+    "id": "distance-error-interval",
+    "request": {
+      "schema_version": 1,
+      "operation": "relation",
+      "scene": {
+        "frame": {
+          "id": "world",
+          "units": "m",
+          "axes": "x-right-y-up"
+        },
+        "observed_at": "2026-10-10T12:00:00Z",
+        "source": "synthetic",
+        "complete": true,
+        "uncertainty": 0.2,
+        "objects": [
+          {
+            "id": "a",
+            "shape": {
+              "type": "point",
+              "coordinates": [
+                0,
+                0
+              ]
+            }
+          },
+          {
+            "id": "b",
+            "shape": {
+              "type": "point",
+              "coordinates": [
+                3,
+                4
+              ]
+            }
+          }
+        ]
+      },
+      "query": {
+        "as_of": "2026-10-10T12:00:01Z",
+        "a": "a",
+        "b": "b",
+        "predicate": "distance"
+      }
+    },
+    "expected": {
+      "status": "supported",
+      "result.distance_interval.0": 4.6,
+      "result.distance_interval.1": 5.4
+    },
+    "rationale": "Two 0.2 error bounds widen nominal distance 5 by 0.4."
+  },
+  {
+    "id": "relation-contact-intersects",
+    "request": {
+      "schema_version": 1,
+      "operation": "relation",
+      "scene": {
+        "frame": {
+          "id": "world",
+          "units": "m",
+          "axes": "x-right-y-up"
+        },
+        "observed_at": "2026-10-10T12:00:00Z",
+        "source": "synthetic",
+        "complete": true,
+        "uncertainty": 0,
+        "objects": [
+          {
+            "id": "a",
+            "shape": {
+              "type": "rectangle",
+              "min": [
+                0,
+                0
+              ],
+              "max": [
+                1,
+                1
+              ]
+            }
+          },
+          {
+            "id": "b",
+            "shape": {
+              "type": "rectangle",
+              "min": [
+                1,
+                0
+              ],
+              "max": [
+                2,
+                1
+              ]
+            }
+          }
+        ]
+      },
+      "query": {
+        "as_of": "2026-10-10T12:00:01Z",
+        "a": "a",
+        "b": "b",
+        "predicate": "intersects"
+      }
+    },
+    "expected": {
+      "status": "supported",
+      "result.value": true
+    },
+    "rationale": "Closed rectangles share their x=1 boundary; intersects includes contact."
+  },
+  {
+    "id": "uncertain-boolean-topology",
+    "request": {
+      "schema_version": 1,
+      "operation": "relation",
+      "scene": {
+        "frame": {
+          "id": "world",
+          "units": "m",
+          "axes": "x-right-y-up"
+        },
+        "observed_at": "2026-10-10T12:00:00Z",
+        "source": "synthetic",
+        "complete": true,
+        "uncertainty": 0.01,
+        "objects": [
+          {
+            "id": "a",
+            "shape": {
+              "type": "rectangle",
+              "min": [
+                0,
+                0
+              ],
+              "max": [
+                1,
+                1
+              ]
+            }
+          },
+          {
+            "id": "b",
+            "shape": {
+              "type": "rectangle",
+              "min": [
+                1,
+                0
+              ],
+              "max": [
+                2,
+                1
+              ]
+            }
+          }
+        ]
+      },
+      "query": {
+        "as_of": "2026-10-10T12:00:01Z",
+        "a": "a",
+        "b": "b",
+        "predicate": "intersects"
+      }
+    },
+    "expected": {
+      "status": "unknown",
+      "result.nominal_value": true
+    },
+    "rationale": "A nominal shared boundary is not a stable boolean relation under positional error."
+  },
+  {
+    "id": "supported-negative-relation",
+    "request": {
+      "schema_version": 1,
+      "operation": "relation",
+      "scene": {
+        "frame": {
+          "id": "world",
+          "units": "m",
+          "axes": "x-right-y-up"
+        },
+        "observed_at": "2026-10-10T12:00:00Z",
+        "source": "synthetic",
+        "complete": true,
+        "uncertainty": 0,
+        "objects": [
+          {
+            "id": "a",
+            "shape": {
+              "type": "rectangle",
+              "min": [
+                0,
+                0
+              ],
+              "max": [
+                1,
+                1
+              ]
+            }
+          },
+          {
+            "id": "b",
+            "shape": {
+              "type": "rectangle",
+              "min": [
+                1,
+                0
+              ],
+              "max": [
+                2,
+                1
+              ]
+            }
+          }
+        ]
+      },
+      "query": {
+        "as_of": "2026-10-10T12:00:01Z",
+        "a": "a",
+        "b": "b",
+        "predicate": "covers"
+      }
+    },
+    "expected": {
+      "status": "supported",
+      "result.value": false
+    },
+    "rationale": "Neither adjacent rectangle contains the other; a false predicate is a supported answer."
+  },
+  {
+    "id": "plan-around-wall",
+    "request": {
+      "schema_version": 1,
+      "operation": "plan",
+      "scene": {
+        "frame": {
+          "id": "world",
+          "units": "m",
+          "axes": "x-right-y-up"
+        },
+        "observed_at": "2026-10-10T12:00:00Z",
+        "source": "synthetic",
+        "complete": true,
+        "uncertainty": 0,
+        "objects": [
+          {
+            "id": "wall",
+            "shape": {
+              "type": "rectangle",
+              "min": [
+                2,
+                -1
+              ],
+              "max": [
+                4,
+                1
+              ]
+            }
+          }
+        ],
+        "workspace": {
+          "type": "rectangle",
+          "min": [
+            -1,
+            -3
+          ],
+          "max": [
+            7,
+            3
+          ]
+        }
+      },
+      "query": {
+        "as_of": "2026-10-10T12:00:01Z",
+        "start": [
+          0,
+          0
+        ],
+        "goal": [
+          6,
+          0
+        ],
+        "radius": 0.25,
+        "margin": 0.1,
+        "grid": {
+          "min": [
+            -1,
+            -3
+          ],
+          "max": [
+            7,
+            3
+          ],
+          "step": 0.5,
+          "max_nodes": 1000
+        }
+      }
+    },
+    "expected": {
+      "status": "supported",
+      "result.length": 9,
+      "result.validation.clear": true
+    },
+    "rationale": "Step 0.5 requires going to y=\u00b11.5. Horizontal distance 6 plus vertical round trip 3 gives grid shortest length 9."
+  },
+  {
+    "id": "planner-budget-exhausted",
+    "request": {
+      "schema_version": 1,
+      "operation": "plan",
+      "scene": {
+        "frame": {
+          "id": "world",
+          "units": "m",
+          "axes": "x-right-y-up"
+        },
+        "observed_at": "2026-10-10T12:00:00Z",
+        "source": "synthetic",
+        "complete": true,
+        "uncertainty": 0,
+        "objects": [
+          {
+            "id": "wall",
+            "shape": {
+              "type": "rectangle",
+              "min": [
+                2,
+                -1
+              ],
+              "max": [
+                4,
+                1
+              ]
+            }
+          }
+        ],
+        "workspace": {
+          "type": "rectangle",
+          "min": [
+            -1,
+            -3
+          ],
+          "max": [
+            7,
+            3
+          ]
+        }
+      },
+      "query": {
+        "as_of": "2026-10-10T12:00:01Z",
+        "start": [
+          0,
+          0
+        ],
+        "goal": [
+          6,
+          0
+        ],
+        "radius": 0.25,
+        "margin": 0.1,
+        "grid": {
+          "min": [
+            -1,
+            -3
+          ],
+          "max": [
+            7,
+            3
+          ],
+          "step": 0.5,
+          "max_nodes": 1
+        }
+      }
+    },
+    "expected": {
+      "status": "unknown"
+    },
+    "rationale": "One expansion cannot reach the distant goal; budget exhaustion is not infeasibility."
+  },
+  {
+    "id": "no-route-on-grid",
+    "request": {
+      "schema_version": 1,
+      "operation": "plan",
+      "scene": {
+        "frame": {
+          "id": "world",
+          "units": "m",
+          "axes": "x-right-y-up"
+        },
+        "observed_at": "2026-10-10T12:00:00Z",
+        "source": "synthetic",
+        "complete": true,
+        "uncertainty": 0,
+        "objects": [
+          {
+            "id": "wall",
+            "shape": {
+              "type": "rectangle",
+              "min": [
+                2,
+                -3
+              ],
+              "max": [
+                4,
+                3
+              ]
+            }
+          }
+        ],
+        "workspace": {
+          "type": "rectangle",
+          "min": [
+            -1,
+            -3
+          ],
+          "max": [
+            7,
+            3
+          ]
+        }
+      },
+      "query": {
+        "as_of": "2026-10-10T12:00:01Z",
+        "start": [
+          0,
+          0
+        ],
+        "goal": [
+          6,
+          0
+        ],
+        "radius": 0.25,
+        "margin": 0.1,
+        "grid": {
+          "min": [
+            -1,
+            -3
+          ],
+          "max": [
+            7,
+            3
+          ],
+          "step": 0.5,
+          "max_nodes": 1000
+        }
+      }
+    },
+    "expected": {
+      "status": "blocked"
+    },
+    "rationale": "A wall spanning the complete workspace disconnects the two endpoints on this grid."
+  },
+  {
+    "id": "stationary-disk",
+    "request": {
+      "schema_version": 1,
+      "operation": "check_path",
+      "scene": {
+        "frame": {
+          "id": "world",
+          "units": "m",
+          "axes": "x-right-y-up"
+        },
+        "observed_at": "2026-10-10T12:00:00Z",
+        "source": "synthetic",
+        "complete": true,
+        "uncertainty": 0,
+        "objects": [
+          {
+            "id": "wall",
+            "shape": {
+              "type": "rectangle",
+              "min": [
+                2,
+                -1
+              ],
+              "max": [
+                4,
+                1
+              ]
+            }
+          }
+        ]
+      },
+      "query": {
+        "as_of": "2026-10-10T12:00:01Z",
+        "path": [
+          [
+            0,
+            2
+          ]
+        ],
+        "radius": 0.25,
+        "margin": 0.1
+      }
+    },
+    "expected": {
+      "status": "supported",
+      "result.length": 0
+    },
+    "rationale": "A single-point path tests a stationary disk rather than an invalid line."
+  },
+  {
+    "id": "empty-complete-scene",
+    "request": {
+      "schema_version": 1,
+      "operation": "check_path",
+      "scene": {
+        "frame": {
+          "id": "world",
+          "units": "m",
+          "axes": "x-right-y-up"
+        },
+        "observed_at": "2026-10-10T12:00:00Z",
+        "source": "synthetic",
+        "complete": true,
+        "uncertainty": 0,
+        "objects": []
+      },
+      "query": {
+        "as_of": "2026-10-10T12:00:01Z",
+        "path": [
+          [
+            0,
+            0
+          ],
+          [
+            6,
+            0
+          ]
+        ],
+        "radius": 0.25,
+        "margin": 0.1
+      }
+    },
+    "expected": {
+      "status": "supported",
+      "result.minimum_obstacle_clearance": null
+    },
+    "rationale": "Explicitly complete empty obstacle inventory has no obstacle clearance minimum."
+  },
+  {
+    "id": "mixed-units-rejected",
+    "request": {
+      "schema_version": 1,
+      "operation": "check_path",
+      "scene": {
+        "frame": {
+          "id": "world",
+          "units": "m",
+          "axes": "x-right-y-up"
+        },
+        "observed_at": "2026-10-10T12:00:00Z",
+        "source": "synthetic",
+        "complete": true,
+        "uncertainty": 0,
+        "objects": [
+          {
+            "id": "wall",
+            "shape": {
+              "type": "rectangle",
+              "min": [
+                2,
+                -1
+              ],
+              "max": [
+                4,
+                1
+              ]
+            }
+          }
+        ]
+      },
+      "query": {
+        "as_of": "2026-10-10T12:00:01Z",
+        "path": [
+          [
+            0,
+            1.4
+          ],
+          [
+            6,
+            1.4
+          ]
+        ],
+        "radius": 0.25,
+        "margin": 0.1,
+        "units": "px"
+      }
+    },
+    "expected": {
+      "status": "invalid"
+    },
+    "rationale": "Pixel query coordinates cannot be interpreted in a metre scene."
+  },
+  {
+    "id": "mixed-frames-rejected",
+    "request": {
+      "schema_version": 1,
+      "operation": "check_path",
+      "scene": {
+        "frame": {
+          "id": "world",
+          "units": "m",
+          "axes": "x-right-y-up"
+        },
+        "observed_at": "2026-10-10T12:00:00Z",
+        "source": "synthetic",
+        "complete": true,
+        "uncertainty": 0,
+        "objects": [
+          {
+            "id": "wall",
+            "shape": {
+              "type": "rectangle",
+              "min": [
+                2,
+                -1
+              ],
+              "max": [
+                4,
+                1
+              ]
+            }
+          }
+        ]
+      },
+      "query": {
+        "as_of": "2026-10-10T12:00:01Z",
+        "path": [
+          [
+            0,
+            1.4
+          ],
+          [
+            6,
+            1.4
+          ]
+        ],
+        "radius": 0.25,
+        "margin": 0.1,
+        "frame_id": "screen"
+      }
+    },
+    "expected": {
+      "status": "invalid"
+    },
+    "rationale": "Coordinates in a different frame require an explicit transform."
+  },
+  {
+    "id": "z-coordinate-rejected",
+    "request": {
+      "schema_version": 1,
+      "operation": "check_path",
+      "scene": {
+        "frame": {
+          "id": "world",
+          "units": "m",
+          "axes": "x-right-y-up"
+        },
+        "observed_at": "2026-10-10T12:00:00Z",
+        "source": "synthetic",
+        "complete": true,
+        "uncertainty": 0,
+        "objects": [
+          {
+            "id": "wall",
+            "shape": {
+              "type": "rectangle",
+              "min": [
+                2,
+                -1
+              ],
+              "max": [
+                4,
+                1
+              ]
+            }
+          }
+        ]
+      },
+      "query": {
+        "as_of": "2026-10-10T12:00:01Z",
+        "path": [
+          [
+            0,
+            1.4,
+            0
+          ],
+          [
+            6,
+            1.4
+          ]
+        ],
+        "radius": 0.25,
+        "margin": 0.1
+      }
+    },
+    "expected": {
+      "status": "invalid"
+    },
+    "rationale": "Discarding Z would change the question; the runtime is strictly 2D."
+  },
+  {
+    "id": "self-intersection-rejected",
+    "request": {
+      "schema_version": 1,
+      "operation": "check_path",
+      "scene": {
+        "frame": {
+          "id": "world",
+          "units": "m",
+          "axes": "x-right-y-up"
+        },
+        "observed_at": "2026-10-10T12:00:00Z",
+        "source": "synthetic",
+        "complete": true,
+        "uncertainty": 0,
+        "objects": [
+          {
+            "id": "wall",
+            "shape": {
+              "type": "polygon",
+              "vertices": [
+                [
+                  0,
+                  0
+                ],
+                [
+                  2,
+                  2
+                ],
+                [
+                  0,
+                  2
+                ],
+                [
+                  2,
+                  0
+                ]
+              ]
+            }
+          }
+        ]
+      },
+      "query": {
+        "as_of": "2026-10-10T12:00:01Z",
+        "path": [
+          [
+            0,
+            1.4
+          ],
+          [
+            6,
+            1.4
+          ]
+        ],
+        "radius": 0.25,
+        "margin": 0.1
+      }
+    },
+    "expected": {
+      "status": "invalid"
+    },
+    "rationale": "A bow-tie ring is invalid; it must not be silently repaired."
+  },
+  {
+    "id": "duplicate-object-rejected",
+    "request": {
+      "schema_version": 1,
+      "operation": "check_path",
+      "scene": {
+        "frame": {
+          "id": "world",
+          "units": "m",
+          "axes": "x-right-y-up"
+        },
+        "observed_at": "2026-10-10T12:00:00Z",
+        "source": "synthetic",
+        "complete": true,
+        "uncertainty": 0,
+        "objects": [
+          {
+            "id": "wall",
+            "shape": {
+              "type": "rectangle",
+              "min": [
+                2,
+                -1
+              ],
+              "max": [
+                4,
+                1
+              ]
+            }
+          },
+          {
+            "id": "wall",
+            "shape": {
+              "type": "rectangle",
+              "min": [
+                2,
+                -1
+              ],
+              "max": [
+                4,
+                1
+              ]
+            }
+          }
+        ]
+      },
+      "query": {
+        "as_of": "2026-10-10T12:00:01Z",
+        "path": [
+          [
+            0,
+            1.4
+          ],
+          [
+            6,
+            1.4
+          ]
+        ],
+        "radius": 0.25,
+        "margin": 0.1
+      }
+    },
+    "expected": {
+      "status": "invalid"
+    },
+    "rationale": "Obstacle identifiers must be unique so evidence is unambiguous."
+  },
+  {
+    "id": "planner-no-hidden-snapping",
+    "request": {
+      "schema_version": 1,
+      "operation": "plan",
+      "scene": {
+        "frame": {
+          "id": "world",
+          "units": "m",
+          "axes": "x-right-y-up"
+        },
+        "observed_at": "2026-10-10T12:00:00Z",
+        "source": "synthetic",
+        "complete": true,
+        "uncertainty": 0,
+        "objects": [
+          {
+            "id": "wall",
+            "shape": {
+              "type": "rectangle",
+              "min": [
+                2,
+                -1
+              ],
+              "max": [
+                4,
+                1
+              ]
+            }
+          }
+        ],
+        "workspace": {
+          "type": "rectangle",
+          "min": [
+            -1,
+            -3
+          ],
+          "max": [
+            7,
+            3
+          ]
+        }
+      },
+      "query": {
+        "as_of": "2026-10-10T12:00:01Z",
+        "start": [
+          0.1,
+          0
+        ],
+        "goal": [
+          6,
+          0
+        ],
+        "radius": 0.25,
+        "margin": 0.1,
+        "grid": {
+          "min": [
+            -1,
+            -3
+          ],
+          "max": [
+            7,
+            3
+          ],
+          "step": 0.5,
+          "max_nodes": 1000
+        }
+      }
+    },
+    "expected": {
+      "status": "invalid"
+    },
+    "rationale": "Start is not on the requested half-unit grid."
+  },
+  {
+    "id": "missing-footprint-rejected",
+    "request": {
+      "schema_version": 1,
+      "operation": "check_path",
+      "scene": {
+        "frame": {
+          "id": "world",
+          "units": "m",
+          "axes": "x-right-y-up"
+        },
+        "observed_at": "2026-10-10T12:00:00Z",
+        "source": "synthetic",
+        "complete": true,
+        "uncertainty": 0,
+        "objects": [
+          {
+            "id": "wall",
+            "shape": {
+              "type": "rectangle",
+              "min": [
+                2,
+                -1
+              ],
+              "max": [
+                4,
+                1
+              ]
+            }
+          }
+        ]
+      },
+      "query": {
+        "as_of": "2026-10-10T12:00:01Z",
+        "path": [
+          [
+            0,
+            1.4
+          ],
+          [
+            6,
+            1.4
+          ]
+        ],
+        "margin": 0.1
+      }
+    },
+    "expected": {
+      "status": "invalid"
+    },
+    "rationale": "A footprint cannot silently default to a point."
+  }
+]
